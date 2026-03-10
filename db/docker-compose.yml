@@ -1,0 +1,15 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: statsbomb-postgres
+    environment:
+      POSTGRES_USER: sb
+      POSTGRES_PASSWORD: sbpass
+      POSTGRES_DB: statsbomb
+    ports:
+      - "5432:5432"
+    volumes:
+      - sb_pgdata:/var/lib/postgresql/data
+
+volumes:
+  sb_pgdata:
