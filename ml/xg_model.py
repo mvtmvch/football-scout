@@ -1,6 +1,7 @@
 import psycopg
 import pandas as pd
 import numpy as np
+import joblib
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 
@@ -42,4 +43,5 @@ with psycopg.connect("dbname=statsbomb user=sb password=sbpass host=localhost") 
     goal_scored=y_test.values,
     xG=xg_predictions
     )
+    joblib.dump(cristiano_modaldo,'model_xg.joblib')
     print(results.round(3))
