@@ -208,3 +208,5 @@ __marimo__/
 
 etl/input/
 etl/.venv/
+etl/.DS_Store
+.DS_Store
