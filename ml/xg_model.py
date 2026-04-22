@@ -22,7 +22,6 @@ with psycopg.connect("dbname=statsbomb user=sb password=sbpass host=localhost") 
 
     df['angle'] = np.abs(kąt_slupek1 - kąt_slupek2) * (180 / np.pi)
 
-    #print(df[['outcome', 'is_goal', 'distance', 'angle']].head())
     
     X = df[['distance', 'angle']]
     y = df['is_goal']
@@ -33,9 +32,8 @@ with psycopg.connect("dbname=statsbomb user=sb password=sbpass host=localhost") 
         random_state=69,
         shuffle=True
     )
-    #print(X_train,X_test,len(X_train),len(X_test))
 
-    cristiano_modaldo = model = LogisticRegression()
+    cristiano_modaldo = LogisticRegression()
     cristiano_modaldo.fit(X_train,y_train)
     xg_predictions = cristiano_modaldo.predict_proba(X_test)[:, 1]
     
