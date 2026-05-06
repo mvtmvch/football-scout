@@ -11,5 +11,4 @@ INNER JOIN players on players.player_id = events.player_id
 INNER JOIN teams on events.team_id = teams.team_id
 GROUP BY players.player_name,
 teams.team_name
-ORDER BY suma_xg DESC
-LIMIT 10;
+ORDER BY suma_xg DESC;
