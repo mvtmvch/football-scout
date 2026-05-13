@@ -11,6 +11,15 @@ response = requests.get("http://127.0.0.1:8000/players/report")
 data_p = response.json()
 df_p = pd.DataFrame(data_p)
 
+selected_player = st.sidebar.selectbox(
+    "Wybierz zawodnika",
+    df_p["imie_zawodnika"].sort_values().unique()
+)
+
+response = requests.get("http://127.0.0.1:8000/players/shots",
+                        params={"player_name": selected_player})
+df_shots = pd.DataFrame(response.json())
+
 view = st.sidebar.selectbox(
     "Wybierz raport",
     ["Drużyny", "Zawodnicy"])
@@ -44,3 +53,5 @@ else:
     st.dataframe(df_p.set_index("imie_zawodnika"))
     st.subheader("Wykres pokazujący wygenerowane xg zawodników")
     st.bar_chart(df_p.set_index("imie_zawodnika")[col].sort_values(ascending=False).head(top_n))
+    st.subheader(f"Strzały wybranego zawodnika: {selected_player}")
+    st.dataframe(df_shots)

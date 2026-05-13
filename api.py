@@ -14,15 +14,22 @@ def count_xg(distance:float, angle:float):
     return {"xg": float(proba_goal)}
 
 @app.get("/teams/report")
-def show_report():
+def get_team_report():
     query = Path('sql/team_report.sql').read_text()
     with psycopg.connect("dbname=statsbomb user=sb password=sbpass host=localhost") as conn:
         df = pd.read_sql_query(query, conn)
         return df.to_dict(orient="records")
     
 @app.get("/players/report")
-def show_report():
+def get_player_report():
     query = Path('sql/player_report.sql').read_text()
     with psycopg.connect("dbname=statsbomb user=sb password=sbpass host=localhost") as conn:
         df = pd.read_sql_query(query, conn)
+        return df.to_dict(orient="records")
+
+@app.get("/players/shots")
+def get_player_shots(player_name:str):
+    query = Path('sql/player_shots.sql').read_text()
+    with psycopg.connect("dbname=statsbomb user=sb password=sbpass host=localhost") as conn:
+        df = pd.read_sql_query(query, conn, params={"player_name": f"%{player_name}%"})
         return df.to_dict(orient="records")
