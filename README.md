@@ -6,7 +6,7 @@ The application transforms raw match data into a PostgreSQL database, estimates 
 
 The project was built to practice the complete data workflow — from raw sports data and ETL, through SQL and machine learning, to an API and a user-facing analytical dashboard.
 
-![Football Scout Dashboard](docs/dashboard.png)
+![Football Scout Dashboard](docs/dashboard_players.png)
 
 ## Key Features
 
